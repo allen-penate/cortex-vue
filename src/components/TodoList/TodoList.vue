@@ -12,25 +12,8 @@
             v-if="!item"
             :key="`divider-${item.id}`"
           ></v-divider>
+          <todo-item :todo=item :key="`item-${item.id}`"></todo-item>
 
-          <v-list-item
-            v-else
-            :key="`item-${item.id}`"
-            :value="item"
-            active-class="deep-purple--text text--accent-4"
-          >
-            <template v-slot:default="{ completed }">
-              <v-list-item-action>
-                <v-checkbox
-                  :input-value="completed"
-                  color="deep-purple accent-4"
-                ></v-checkbox>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.title"></v-list-item-title>
-              </v-list-item-content>
-            </template>
-          </v-list-item>
         </template>
       </v-list-item-group>
     </v-list>
@@ -38,6 +21,8 @@
 </template>
 
 <script>
+import TodoItem from './TodoItem';
+
 export default {
   name: "TodoList",
   props: {
@@ -47,6 +32,7 @@ export default {
     //     }
     // },
   },
+  components: { TodoItem },
   data() {
     return {
       items: [
@@ -78,7 +64,7 @@ export default {
           userId: 4,
           id: 68,
           title: "aut id perspiciatis voluptatem iusto",
-          completed: false,
+          completed: true,
         },
         {
           userId: 4,
@@ -91,7 +77,7 @@ export default {
           userId: 4,
           id: 70,
           title: "ut sequi accusantium et mollitia delectus sunt",
-          completed: false,
+          completed: true,
         },
         {
           userId: 4,
@@ -121,5 +107,10 @@ export default {
       ],
     };
   },
+  computed:{
+    completed(){
+      return this.items.filter((item)=>(item.completed)).map(item=>item.id);
+    }
+  }
 };
 </script>
