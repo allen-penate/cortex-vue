@@ -37,10 +37,10 @@ export default {
   methods: {
     onCompleted() {
       if(!this.isCompleted){
-        this.$emit("todo-completed", this.todo.id);
+        this.$emit("onTodoCompleted", this.todo.id);
       }
     },
   },
-  emits: ["todo-completed"],
+  emits: ["onTodoCompleted"],
 };
 </script>
