@@ -38,20 +38,20 @@
     </v-app-bar>
 
     <v-main>
-      <todo-list/>
+      <todo-box :user="{id: 4}"/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 
-import {TodoList} from './components/TodoList';
+import {TodoBox} from './components/TodoList';
 
 export default {
   name: 'App',
 
   components: {
-    TodoList
+    TodoBox
   },
 
   data: () => ({

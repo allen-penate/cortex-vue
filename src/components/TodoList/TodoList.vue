@@ -5,14 +5,15 @@
   >
     <v-list shaped>
       <v-list-item-group
+        v-model="completed"
         multiple
       >
-        <template v-for="item in items">
+        <template v-for="todo in todos">
           <v-divider
-            v-if="!item"
-            :key="`divider-${item.id}`"
+            v-if="!todo"
+            :key="`divider-${todo.id}`"
           ></v-divider>
-          <todo-item :todo=item :key="`item-${item.id}`"></todo-item>
+          <TodoItem :todo=todo :key="`item-${todo.id}`" @onTodoCompleted="onTodoCompleted"></TodoItem>
 
         </template>
       </v-list-item-group>
@@ -21,21 +22,15 @@
 </template>
 
 <script>
-import TodoItem from './TodoItem';
+import TodoItem from './TodoItem.vue';
 
 export default {
   name: "TodoList",
   props: {
-    // items: {
-    //     type: Array,
-    //     default(){
-    //     }
-    // },
-  },
-  components: { TodoItem },
-  data() {
-    return {
-      items: [
+    todos: {
+        type: Array,
+        default(){
+          return   [
         {
           userId: 4,
           id: 64,
@@ -46,70 +41,32 @@ export default {
           userId: 4,
           id: 65,
           title: "fugiat pariatur ratione ut asperiores necessitatibus magni",
-          completed: false,
+          completed: true,
         },
         {
           userId: 4,
           id: 66,
           title: "rerum eum molestias autem voluptatum sit optio",
           completed: false,
-        },
-        {
-          userId: 4,
-          id: 67,
-          title: "quia voluptatibus voluptatem quos similique maiores repellat",
-          completed: false,
-        },
-        {
-          userId: 4,
-          id: 68,
-          title: "aut id perspiciatis voluptatem iusto",
-          completed: true,
-        },
-        {
-          userId: 4,
-          id: 69,
-          title:
-            "doloribus sint dolorum ab adipisci itaque dignissimos aliquam suscipit",
-          completed: false,
-        },
-        {
-          userId: 4,
-          id: 70,
-          title: "ut sequi accusantium et mollitia delectus sunt",
-          completed: true,
-        },
-        {
-          userId: 4,
-          id: 71,
-          title: "aut velit saepe ullam",
-          completed: false,
-        },
-        {
-          userId: 4,
-          id: 72,
-          title:
-            "praesentium facilis facere quis harum voluptatibus voluptatem eum",
-          completed: false,
-        },
-        {
-          userId: 4,
-          id: 73,
-          title: "sint amet quia totam corporis qui exercitationem commodi",
-          completed: true,
-        },
-        {
-          userId: 4,
-          id: 74,
-          title: "expedita tempore nobis eveniet laborum maiores",
-          completed: false,
-        },
-      ],
-    };
+        },]          
+        }
+    },
   },
+  components: { TodoItem },
+  emits:['onTodoCompleted'],
   computed:{
-    completed(){
-      return this.items.filter((item)=>(item.completed)).map(item=>item.id);
+    completed: {
+      get(){
+        return this.todos.filter((todo)=>(todo.completed)).map(todo=>todo.id);
+      },
+      set(newValue){
+        console.log(newValue);
+      }
+    },
+  },
+  methods:{
+    onTodoCompleted(todoId){
+      this.$emit("onTodoCompleted", todoId)
     }
   }
 };

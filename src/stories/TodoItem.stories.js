@@ -1,10 +1,10 @@
 import TodoItem from '../components/TodoList/TodoItem.vue';
 
+
 export default {
   title: 'Cortex/TodoList/TodoItem',
   component: TodoItem,
   argTypes: {
-
   },
 };
 
@@ -30,7 +30,7 @@ export const UnCompleted = Template.bind({});
 UnCompleted.args = {
   todo:{
     userId: 4,
-    id: 68,
+    id: 67,
     title: "aut id perspiciatis voluptatem iusto",
     completed: false,
   }
