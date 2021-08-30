@@ -38,8 +38,22 @@
     </v-app-bar>
 
     <v-main>
-      <task-item />
-      <todo-box :user="{id: 4}"/>
+      <v-container>
+        <v-row>
+          <v-col md="4">
+              <task-item />
+          </v-col>  
+          <v-col md="4">
+              <todo-box :user="{id: 4}"/>
+          </v-col>  
+          <v-col md="4">
+            <care-team-box />
+          </v-col>    
+        </v-row>
+      </v-container>
+
+      
+     
     </v-main>
   </v-app>
 </template>
@@ -48,12 +62,13 @@
 
 import {TodoBox} from './components/TodoList';
 import {TaskItem} from './components/TaskBox';
+import {CareTeamBox} from './components/CareTeamBox';
 
 export default {
   name: 'App',
 
   components: {
-    TodoBox, TaskItem
+    TodoBox, TaskItem, CareTeamBox
   },
 
   data: () => ({
