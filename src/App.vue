@@ -38,6 +38,7 @@
     </v-app-bar>
 
     <v-main>
+      <task-item />
       <todo-box :user="{id: 4}"/>
     </v-main>
   </v-app>
@@ -46,12 +47,13 @@
 <script>
 
 import {TodoBox} from './components/TodoList';
+import {TaskItem} from './components/TaskBox';
 
 export default {
   name: 'App',
 
   components: {
-    TodoBox
+    TodoBox, TaskItem
   },
 
   data: () => ({
